@@ -19,24 +19,24 @@ function getSeason(date) {
   }
   let month = date.getMonth();
   switch (month) {
-    case '01':
-    case '02':
-    case '12':
+    case 0:
+    case 1:
+    case 11:
       return 'winter';
     break;
-    case '03':
-    case '04':
-    case '05':
+    case 2:
+    case 3:
+    case 4:
       return 'spring';
     break;
-    case '06':
-    case '07':
-    case '08':
+    case 5:
+    case 6:
+    case 7:
       return 'summer';
     break;
-    case '09':
-    case '10':
-    case '11':
+    case 8:
+    case 9:
+    case 10:
       return 'autumn';
     break;
   }
