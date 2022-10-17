@@ -17,15 +17,28 @@ function transform(arr) {
   // throw new NotImplementedError('Not implemented');
   // remove line with error and write your code here
   let result = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === '--discard-next') {
-      result = arr.splice(i, 2);
-    } else if (arr[i] === '--discard-prev') {
-      result = arr.splice(i - 1, 2);
-    } else if (arr[i] === '--double-next') {
-      result = arr.splice(i, 1, i + 1);
-    } else if (arr[i] === '--double-prev') {
-      result = arr.splice(i, 1, i - 1);
+  if (!Array.isArray(arr)) {
+    throw new Error("'arr' parameter must be an instance of the Array!");
+  } else if (arr === []) {
+    return arr;
+  } else {
+    for (let i = 0; i < arr.length; i++) {
+      switch (arr[i]) {
+        case '--discard-next':
+          if (i != arr.length - 1) i += 1;
+          break;
+        case '--discard-prev':
+          if (arr[i-2] !== "--discard-next" && i !== 0) result.pop();
+          break;
+        case '--double-next':
+          if (i !== arr.length - 1) result.push(arr[i+1]);
+          break;
+        case '--double-prev':
+          if (arr[i-2] !== "--discard-next" && i !== 0) result.push(arr[i-1]);
+          break;
+        default:
+          result.push(arr[i]);
+      }
     }
   }
   return result;
